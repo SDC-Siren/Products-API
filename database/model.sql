@@ -1,56 +1,50 @@
-CREATE TABLE IF NOT EXISTS product {
-  id INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS product (
+  id SERIAL PRIMARY KEY,
   name VARCHAR(40) NOT NULL,
   slogan VARCHAR(100),
   description VARCHAR(300),
   category VARCHAR(20),
-  default_price INT,
-  PRIMARY KEY (id)
-}
+  default_price INT
+);
 
-CREATE TABLE IF NOT EXISTS features {
-  id INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS features (
+  id SERIAL PRIMARY KEY,
   product_id INT NOT NULL,
   feature VARCHAR(30) NOT NULL,
   value VARCHAR(25),
-  PRIMARY KEY (id),
   FOREIGN KEY (product_id) REFERENCES product(id)
-}
+);
 
-CREATE TABLE IF NOT EXISTS styles {
-  id INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS styles (
+  id SERIAL PRIMARY KEY,
   product_id INT NOT NULL,
   name VARCHAR(30) NOT NULL,
   sale_price INT,
   original_price INT,
   default_style BOOL,
-  PRIMARY KEY (id),
   FOREIGN KEY (product_id) REFERENCES product(id)
-}
+);
 
-CREATE TABLE IF NOT EXISTS photos {
-  id INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS photos (
+  id SERIAL PRIMARY KEY,
   style_id INT NOT NULL,
   url VARCHAR(135),
   thumbnail_url VARCHAR(135),
-  PRIMARY KEY (id),
   FOREIGN KEY (style_id) REFERENCES styles(id)
-}
+);
 
-CREATE TABLE IF NOT EXISTS skus {
-  id INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS skus (
+  id SERIAL PRIMARY KEY,
   style_id INT NOT NULL,
   size VARCHAR(3),
   quantity INT,
-  PRIMARY KEY (id),
   FOREIGN KEY (style_id) REFERENCES styles(id)
-}
+);
 
-CREATE TABLE IF NOT EXISTS related {
-  id INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS related (
+  id SERIAL PRIMARY KEY,
   current_product_id INT NOT NULL,
   related_product_id INT NOT NULL,
-  PRIMARY KEY (id),
   FOREIGN KEY (current_product_id) REFERENCES product(id),
   FOREIGN KEY (related_product_id) REFERENCES product(id)
-}
+);
