@@ -1,0 +1,78 @@
+// product
+id,name,slogan,description,category,default_price
+1,"Camo Onesie","Blend in to your crowd","The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.","Jackets",140
+2,"Bright Future Sunglasses","You've got to wear shades","Where you're going you might not need roads, but you definitely need some shades. Give those baby blues a rest and let the future shine bright on these timeless lenses.","Accessories",69
+3,"Morning Joggers","Make yourself a morning person","Whether you're a morning person or not.  Whether you're gym bound or not.  Everyone looks good in joggers.","Pants",40
+4,"Slacker's Slacks","Comfortable for everything, or nothing","I'll tell you how great they are after I nap for a bit.","Pants",65
+5,"Heir Force Ones","A sneaker dynasty","Now where da boxes where I keep mine? You should peep mine, maybe once or twice but never three times. I'm just a sneaker pro, I love Pumas and shell toes, but can't nothin compare to a fresh crispy white pearl","Kicks",99
+6,"Pumped Up Kicks","Faster than a just about anything","The Pumped Up serves up crisp court style with a modern look. These shoes show off tennis-whites shades and are constructed with a supple leather upper and a classic rubber cupsole.","Kicks",89
+7,"Blues Suede Shoes","2019 Stanley Cup Limited Edition","Touch down in the land of the Delta Blues in the middle of the pouring rain","Dress Shoes",120
+8,"YEasy 350","Just jumped over jumpman","These stretchy knit shoes show off asymmetrical lacing and a big sculpted rubber midsole. In a nod to adidas soccer heritage.","Kicks",450
+9,"Summer Shoes","A risky call in the spring or fall","Low-top panelled buffed leather and mesh sneakers. Sizing embroidered in black at round toe. Tonal lace-up closure. Pull-loop and rubberized style name at padded tongue. Padded collar. Pull-loop at heel collar. Logo embroidered in black at outer side. Tonal treaded rubber sole. Tonal stitching.","Kicks",59
+10,"Infinity Stone","Reality is often disappointing. That is, it was. Now, reality can be whatever I want.","The Infinity Stones are six immensely powerful stone-like objects tied to different aspects of the universe, created by the Cosmic Entities. Each of the stones possesses unique capabilities that have been enhanced and altered by various alien civilizations for millennia.","Accessories",5000000
+
+// features
+id,product_id,feature,value
+1,1,"Fabric","Canvas"
+2,1,"Buttons","Brass"
+3,2,"Lenses","Ultrasheen"
+4,2,"UV Protection",null
+5,2,"Frames","LightCompose"
+6,3,"Fabric","100% Cotton"
+7,3,"Cut","Skinny"
+8,4,"Fabric","99% Cotton 1% Elastic"
+9,4,"Cut","Loose"
+10,5,"Sole","Rubber"
+
+
+// styles
+// id,productId,name,sale_price,original_price,default_style
+1,1,"Forest Green & Black",null,140,1
+2,1,"Desert Brown & Tan",null,140,0
+3,1,"Ocean Blue & Grey",100,140,0
+4,1,"Digital Red & Black",null,140,0
+5,1,"Sky Blue & White",100,140,0
+6,1,"Dark Grey & Black",null,170,0
+7,2,"Black Lenses & Black Frame",null,69,0
+8,2,"Black Lenses & Gold Frame",null,69,1
+9,2,"Gold Lenses & Black Frame",null,69,0
+10,2,"Gold Lenses & Gold Frame",null,69,0
+
+// photos
+id,styleId,url,thumbnail_url
+1,1,"https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80","https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80"
+2,1,"https://images.unsplash.com/photo-1534011546717-407bced4d25c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2734&q=80","https://images.unsplash.com/photo-1534011546717-407bced4d25c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80"
+3,1,"https://images.unsplash.com/photo-1549831243-a69a0b3d39e0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2775&q=80","https://images.unsplash.com/photo-1549831243-a69a0b3d39e0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80"
+4,1,"https://images.unsplash.com/photo-1527522883525-97119bfce82d?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80","https://images.unsplash.com/photo-1527522883525-97119bfce82d?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80"
+5,1,"https://images.unsplash.com/photo-1556648202-80e751c133da?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80","https://images.unsplash.com/photo-1556648202-80e751c133da?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80"
+6,1,"https://images.unsplash.com/photo-1532543491484-63e29b3c1f5d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80","https://images.unsplash.com/photo-1532543491484-63e29b3c1f5d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80"
+8,2,"https://images.unsplash.com/photo-1533779183510-8f55a55f15c1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80","https://images.unsplash.com/photo-1533779183510-8f55a55f15c1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80"
+7,2,"https://images.unsplash.com/photo-1560567546-4c6dbc16877b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80","https://images.unsplash.com/photo-1560567546-4c6dbc16877b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80"
+9,2,"https://images.unsplash.com/photo-1458253329476-1ebb8593a652?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80","https://images.unsplash.com/photo-1458253329476-1ebb8593a652?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80"
+10,2,"https://images.unsplash.com/photo-1422557379185-474fa15bf770?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80","https://images.unsplash.com/photo-1422557379185-474fa15bf770?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80"
+
+// skus
+// id,styleId,size,quantity
+1,1,"XS",8
+2,1,"S",16
+3,1,"M",17
+4,1,"L",10
+5,1,"XL",15
+6,1,"XL",4
+8,2,"XS",8
+7,2,"S",16
+9,2,"M",17
+10,2,"L",10
+
+// related
+id,current_product_id,related_product_id
+1,1,2
+2,1,3
+3,1,8
+4,1,7
+5,2,3
+6,2,7
+7,2,6
+8,2,5
+9,3,5
+10,3,9
