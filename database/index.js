@@ -7,7 +7,7 @@ const pool = new Pool({
 });
 
 // running the SQL file executes its statements and create model
-const model = fs.readFileSync('./database/model.sql').toString();
+const model = fs.readFileSync('./database/schema.sql').toString();
 
 pool.query(model, (err) => {
   if (err) {
@@ -15,13 +15,13 @@ pool.query(model, (err) => {
   }
 });
 
-// pool.query('SELECT product FROM information_schema.tables', (err, res) => {
-//   if (err) {
-//     console.error('Error executing query', err);
-//   } else {
-//     console.log(res);
-//   }
+pool.query(`SELECT table_name FROM information_schema.tables WHERE table_schema = 'public' AND table_type = 'BASE TABLE';`, (err, res) => {
+  if (err) {
+    console.error('Error executing query', err);
+  } else {
+    console.log(res);
+  }
 
-//   // End the database connection
-//   pool.end();
-// });
+  // End the database connection
+  pool.end();
+});
