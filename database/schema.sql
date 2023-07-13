@@ -2,7 +2,7 @@ CREATE TABLE IF NOT EXISTS product (
   id SERIAL PRIMARY KEY,
   name VARCHAR(40) NOT NULL,
   slogan VARCHAR(300),
-  description VARCHAR(450),
+  description VARCHAR(500),
   category VARCHAR(20),
   default_price INT
 );
