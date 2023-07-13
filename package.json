@@ -1,0 +1,25 @@
+{
+  "name": "products-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "db": "node database/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/L-ren/Products-API.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/L-ren/Products-API/issues"
+  },
+  "homepage": "https://github.com/L-ren/Products-API#readme",
+  "dependencies": {
+    "mongoose": "^7.3.4",
+    "pg": "^8.11.1"
+  }
+}
