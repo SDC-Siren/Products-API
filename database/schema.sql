@@ -1,8 +1,8 @@
 CREATE TABLE IF NOT EXISTS product (
   id SERIAL PRIMARY KEY,
   name VARCHAR(40) NOT NULL,
-  slogan VARCHAR(100),
-  description VARCHAR(300),
+  slogan VARCHAR(300),
+  description VARCHAR(450),
   category VARCHAR(20),
   default_price INT
 );
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS photos (
 );
 
 CREATE TABLE IF NOT EXISTS skus (
-  id PRIMARY KEY,
+  id INT PRIMARY KEY,
   style_id INT NOT NULL,
   size VARCHAR(3),
   quantity INT,
