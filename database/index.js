@@ -15,13 +15,13 @@ pool.query(model, (err) => {
   }
 });
 
+// query tables created from schema
 pool.query(`SELECT table_name FROM information_schema.tables WHERE table_schema = 'public' AND table_type = 'BASE TABLE';`, (err, res) => {
   if (err) {
     console.error('Error executing query', err);
   } else {
     console.log(res);
   }
-
   // End the database connection
   pool.end();
 });
