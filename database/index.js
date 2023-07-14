@@ -7,16 +7,16 @@ const Transform = require('stream').Transform;
 const csvStringifier = createCsvStringifier({
   header: [
     { id: 'id', title: 'id' },
-    { id: 'productId', title: 'product_id'},
     { id: 'name', title: 'name'},
-    { id: 'sale_price', title: 'sale_price'},
-    { id: 'original_price', title: 'original_price'},
-    { id: 'default_style', title: 'default_style'},
+    { id: 'slogan', title: 'slogan'},
+    { id: 'description', title: 'description'},
+    { id: 'category', title: 'category'},
+    { id: 'default_price', title: 'default_price'},
   ],
 });
 // call read and write streams on filepaths
-let readStream = fs.createReadStream('/Users/lorenjohnson/Desktop/HackReacter/SDC/CSV/styles.csv');
-let writeStream = fs.createWriteStream(`/Users/lorenjohnson/Desktop/HackReacter/SDC/CSV/cleanStyles.csv`);
+let readStream = fs.createReadStream('/Users/lorenjohnson/Desktop/HackReacter/SDC/CSV/product.csv');
+let writeStream = fs.createWriteStream(`/Users/lorenjohnson/Desktop/HackReacter/SDC/CSV/cleanProduct.csv`);
 
 // transformer takes data from read stream, transforms, and passes to write stream
 class CSVCleaner extends Transform {
@@ -34,11 +34,8 @@ class CSVCleaner extends Transform {
     }
     // filter out all non-number characters
     // console.log(chunk)
-    let originalOnlyNumbers = chunk.original_price.replace(/\D/g, "");
-    chunk.original_price = originalOnlyNumbers;
-    let saleOnlyNumbers = chunk.sale_price.replace(/\D/g, "");
-    chunk.sale_price = saleOnlyNumbers;
-
+    let onlyNumbers = chunk.default_price.replace(/\D/g, "");
+    chunk.default_price = onlyNumbers;
     // use our csvStringifier to turn our chunk into a csv string
     chunk = csvStringifier.stringifyRecords([chunk]);
     this.push(chunk);
@@ -51,7 +48,7 @@ const transformer = new CSVCleaner({writableObjectMode: true});
 // write header for cleaned file
 // writeStream.write('id,name,slogan,description,category,default_price');
 readStream
-  .pipe(csv({columns: [ 'id', 'product_id', 'name', 'sale_price', 'original_price', 'default_style' ]}))
+  .pipe(csv({columns: [ 'id', 'name', 'slogan', 'description', 'category', 'default_price' ]}))
   .pipe(transformer)
   .pipe(writeStream)
   .on('finish', () => {
