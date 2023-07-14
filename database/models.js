@@ -5,7 +5,19 @@ const pool = new Pool({
   database: process.env.PGDB
 });
 
-const model = {};
 
+module.exports.getProducts = function() {
+  console.log('getting products');
+};
 
-module.exports = model;
+module.exports.getInfo = function(product_id) {
+  console.log('getting product info');
+};
+
+module.exports.getStyles = function(product_id) {
+  console.log('getting product styles');
+};
+
+module.exports.getRelated = function(product_id) {
+  console.log('getting related products');
+}
