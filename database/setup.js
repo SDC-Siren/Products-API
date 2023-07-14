@@ -5,8 +5,8 @@ const path = require('path');
 // database setup: "node database/setup.js"
 
 const client = new Client({
-  user: 'lorenjohnson',
-  database: 'atelierProducts'
+  user: process.env.PGUSER,
+  database: process.env.PGDB
 });
 
 async function setUpDatabase() {
