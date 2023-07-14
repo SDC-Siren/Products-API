@@ -1,5 +1,5 @@
 COPY product
-  FROM '/Users/lorenjohnson/Desktop/HackReacter/SDC/CSV/product.csv'
+  FROM '/Users/lorenjohnson/Desktop/HackReacter/SDC/CSV/cleanProduct.csv'
   CSV HEADER;
 
 COPY features
@@ -7,5 +7,5 @@ COPY features
   CSV HEADER;
 
 COPY styles
-  FROM '/Users/lorenjohnson/Desktop/HackReacter/SDC/CSV/styles.csv'
+  FROM '/Users/lorenjohnson/Desktop/HackReacter/SDC/CSV/cleanStyles.csv'
   CSV HEADER;
