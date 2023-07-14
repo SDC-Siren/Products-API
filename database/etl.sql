@@ -1,26 +1,29 @@
 COPY product
   FROM '/Users/lorenjohnson/Desktop/HackReacter/SDC/CSV/cleanProduct.csv'
-  CSV HEADER;
+  DELIMITER ',' CSV HEADER;
 
 COPY features
   FROM '/Users/lorenjohnson/Desktop/HackReacter/SDC/CSV/features.csv'
-  CSV HEADER;
+  DELIMITER ',' CSV HEADER;
 
 COPY styles
   FROM '/Users/lorenjohnson/Desktop/HackReacter/SDC/CSV/cleanStyles.csv'
-  CSV HEADER;
+  DELIMITER ',' CSV HEADER;
 
--- CLEANUP : VARCHAR TOO LONG THUMBNAIL URL
--- COPY photos
---   FROM '/Users/lorenjohnson/Desktop/HackReacter/SDC/CSV/photos.csv'
---   CSV HEADER;
+-- FOREIGN KEY VIOLATIONS: KEY NOT IN PRODUCT
+-- COPY RAW DATA FROM THESE CSV FILES INTO TABLES
+COPY photosRAW
+  FROM '/Users/lorenjohnson/Desktop/HackReacter/SDC/CSV/photos.csv'
+  DELIMITER ',' CSV HEADER;
 
--- CLEANUP : SOME STYLE IDS DO NOT EXIST IN STYLE TABLE
--- COPY skus
+-- COPY skusRAW
 --   FROM '/Users/lorenjohnson/Desktop/HackReacter/SDC/CSV/skus.csv'
 --   CSV HEADER;
 
--- CLEANUP: 'Key (related_product_id)=(0) is not present in table "product".
--- COPY related
+-- COPY relatedRAW
 --   FROM '/Users/lorenjohnson/Desktop/HackReacter/SDC/CSV/related.csv'
 --   CSV HEADER;
+
+-- POPULATE TABLES WITH VALID ONLY
+INSERT INTO photos
+  SELECT * FROM photosRAW p INNER JOIN styles s ON p.style_id=s.id;

@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS features (
   product_id INT NOT NULL,
   feature VARCHAR(30) NOT NULL,
   value VARCHAR(30),
-  FOREIGN KEY (product_id) REFERENCES product(id)
+  -- FOREIGN KEY (product_id) REFERENCES product(id)
 );
 
 CREATE TABLE IF NOT EXISTS styles (
@@ -25,26 +25,51 @@ CREATE TABLE IF NOT EXISTS styles (
   FOREIGN KEY (product_id) REFERENCES product(id)
 );
 
+CREATE TABLE IF NOT EXISTS photosRAW (
+  id SERIAL PRIMARY KEY,
+  style_id INT NOT NULL,
+  url TEXT NOT NULL,
+  thumbnail_url TEXT,
+  -- FOREIGN KEY (style_id) REFERENCES styles(id)
+);
+
+-- CREATE TABLE IF NOT EXISTS skusRAW (
+--   id INT PRIMARY KEY,
+--   style_id INT NOT NULL,
+--   size VARCHAR(10),
+--   quantity INT,
+  -- FOREIGN KEY (style_id) REFERENCES styles(id)
+-- );
+
+-- CREATE TABLE IF NOT EXISTS relatedRAW (
+--   id SERIAL PRIMARY KEY,
+--   current_product_id INT NOT NULL,
+--   related_product_id INT NOT NULL,
+  -- FOREIGN KEY (current_product_id) REFERENCES product(id),
+  -- FOREIGN KEY (related_product_id) REFERENCES product(id)
+);
+
 CREATE TABLE IF NOT EXISTS photos (
   id SERIAL PRIMARY KEY,
   style_id INT NOT NULL,
-  url VARCHAR(300) NOT NULL,
-  thumbnail_url VARCHAR(300),
+  url TEXT NOT NULL,
+  thumbnail_url TEXT,
   FOREIGN KEY (style_id) REFERENCES styles(id)
 );
 
-CREATE TABLE IF NOT EXISTS skus (
-  id INT PRIMARY KEY,
-  style_id INT NOT NULL,
-  size VARCHAR(10),
-  quantity INT,
-  FOREIGN KEY (style_id) REFERENCES styles(id)
-);
+-- CREATE TABLE IF NOT EXISTS skus (
+--   id INT PRIMARY KEY,
+--   style_id INT NOT NULL,
+--   size VARCHAR(10),
+--   quantity INT,
+--   FOREIGN KEY (style_id) REFERENCES styles(id)
+-- );
 
-CREATE TABLE IF NOT EXISTS related (
-  id SERIAL PRIMARY KEY,
-  current_product_id INT NOT NULL,
-  related_product_id INT NOT NULL,
-  FOREIGN KEY (current_product_id) REFERENCES product(id),
-  FOREIGN KEY (related_product_id) REFERENCES product(id)
-);
+-- CREATE TABLE IF NOT EXISTS related (
+--   id SERIAL PRIMARY KEY,
+--   current_product_id INT NOT NULL,
+--   related_product_id INT NOT NULL,
+--   FOREIGN KEY (current_product_id) REFERENCES product(id),
+--   FOREIGN KEY (related_product_id) REFERENCES product(id)
+-- );
+
