@@ -28,15 +28,15 @@ CREATE TABLE IF NOT EXISTS styles (
 CREATE TABLE IF NOT EXISTS photos (
   id SERIAL PRIMARY KEY,
   style_id INT NOT NULL,
-  url VARCHAR(135) NOT NULL,
-  thumbnail_url VARCHAR(135),
+  url VARCHAR(300) NOT NULL,
+  thumbnail_url VARCHAR(300),
   FOREIGN KEY (style_id) REFERENCES styles(id)
 );
 
 CREATE TABLE IF NOT EXISTS skus (
   id INT PRIMARY KEY,
   style_id INT NOT NULL,
-  size VARCHAR(3),
+  size VARCHAR(10),
   quantity INT,
   FOREIGN KEY (style_id) REFERENCES styles(id)
 );
