@@ -19,6 +19,8 @@
   },
   "homepage": "https://github.com/L-ren/Products-API#readme",
   "dependencies": {
+    "csv": "^6.3.1",
+    "csv-writer": "^1.6.0",
     "mongoose": "^7.3.4",
     "pg": "^8.11.1",
     "pg-copy-streams": "^6.0.5"

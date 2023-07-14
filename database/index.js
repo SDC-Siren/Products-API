@@ -1,48 +1,56 @@
-const { Client } = require('pg');
 const fs = require('fs');
-const path = require('path');
+const csv = require('csv-parse').parse;
+const createCsvStringifier = require('csv-writer').createObjectCsvStringifier;
+const Transform = require('stream').Transform;
 
-const client = new Client({
-  user: 'lorenjohnson',
-  database: 'atelierProducts'
+// headers for clean product csv file
+const csvStringifier = createCsvStringifier({
+  header: [
+    { id: 'id', title: 'id' },
+    { id: 'name', title: 'name'},
+    { id: 'slogan', title: 'slogan'},
+    { id: 'description', title: 'description'},
+    { id: 'category', title: 'category'},
+    { id: 'default_price', title: 'default_price'},
+  ],
 });
-async function setUpDatabase() {
-  await client.connect();
-  const schema = fs.readFileSync(path.join(__dirname, '/schema.sql')).toString();
-  const etl = fs.readFileSync(path.join(__dirname, '/etl.sql')).toString();
+// call read and write streams on filepaths
+let readStream = fs.createReadStream('/Users/lorenjohnson/Desktop/HackReacter/SDC/CSV/product.csv');
+let writeStream = fs.createWriteStream(`/Users/lorenjohnson/Desktop/HackReacter/SDC/CSV/cleanProduct.csv`);
 
-  // creating tables from schema
-  client.query(schema, (err) => {
-    if (err) {
-      console.log('Error executing SQL file', err);
-    }
-  })
+// transformer takes data from read stream, transforms, and passes to write stream
+class CSVCleaner extends Transform {
+  constructor(options) {
+    super(options);
+  }
 
-  // copying over data from csv files
-  client.query(etl, (err) => {
-    if (err) {
-      console.log('Error executing SQL file', err);
+  _transform(chunk, encoding, next) {
+    for (let key in chunk) {
+      let trimKey = key.trim(); // removes white space from both ends of string
+      chunk[trimKey] = chunk[key];
+      if (key !== trimKey) {
+        delete chunk[key];
+      }
     }
+    // filter out all non-number characters
+    console.log(chunk)
+    let onlyNumbers = chunk.default_price.replace(/\D/g, "");
+    chunk.default_price = onlyNumbers;
+    // use our csvStringifier to turn our chunk into a csv string
+    chunk = csvStringifier.stringifyRecords([chunk]);
+    this.push(chunk);
+    next();
+  }
+};
+
+const transformer = new CSVCleaner({writableObjectMode: true});
+
+// write header for cleaned file
+// writeStream.write('id,name,slogan,description,category,default_price');
+readStream
+  .pipe(csv({columns: [ 'id', 'name', 'slogan', 'description', 'category', 'default_price' ]}))
+  .pipe(transformer)
+  .pipe(writeStream)
+  .on('finish', () => {
+    console.log('finished')
   });
-
-  client.query(`SELECT * FROM product WHERE id=1`, (err, res) => {
-    if (err) {
-      console.log('Error executing query', err);
-    } else {
-      console.log(res);
-    }
-    client.end();
-  });
-
-  // query tables created from schema
-  // client.query(`SELECT table_name FROM information_schema.tables WHERE table_schema = 'public' AND table_type = 'BASE TABLE';`, (err, res) => {
-  //   if (err) {
-  //     console.error('Error executing query', err);
-  //   } else {
-  //     console.log(res);
-  //   }
-  //   // End the database connection
-  //   client.end();
-  // });
-}
-setUpDatabase();

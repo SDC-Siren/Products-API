@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS features (
   id SERIAL PRIMARY KEY,
   product_id INT NOT NULL,
   feature VARCHAR(30) NOT NULL,
-  value VARCHAR(25),
+  value VARCHAR(30),
   FOREIGN KEY (product_id) REFERENCES product(id)
 );
 
