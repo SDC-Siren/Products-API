@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS features (
   product_id INT NOT NULL,
   feature VARCHAR(30) NOT NULL,
   value VARCHAR(30),
-  -- FOREIGN KEY (product_id) REFERENCES product(id)
+  FOREIGN KEY (product_id) REFERENCES product(id)
 );
 
 CREATE TABLE IF NOT EXISTS styles (
@@ -29,24 +29,26 @@ CREATE TABLE IF NOT EXISTS photosRAW (
   id SERIAL PRIMARY KEY,
   style_id INT NOT NULL,
   url TEXT NOT NULL,
-  thumbnail_url TEXT,
-  -- FOREIGN KEY (style_id) REFERENCES styles(id)
+  thumbnail_url TEXT
 );
 
--- CREATE TABLE IF NOT EXISTS skusRAW (
---   id INT PRIMARY KEY,
---   style_id INT NOT NULL,
---   size VARCHAR(10),
---   quantity INT,
-  -- FOREIGN KEY (style_id) REFERENCES styles(id)
--- );
+CREATE TABLE IF NOT EXISTS skusRAW (
+  id SERIAL PRIMARY KEY,
+  style_id INT NOT NULL,
+  size VARCHAR(10),
+  quantity INT
+);
 
--- CREATE TABLE IF NOT EXISTS relatedRAW (
---   id SERIAL PRIMARY KEY,
---   current_product_id INT NOT NULL,
---   related_product_id INT NOT NULL,
-  -- FOREIGN KEY (current_product_id) REFERENCES product(id),
-  -- FOREIGN KEY (related_product_id) REFERENCES product(id)
+CREATE TABLE IF NOT EXISTS relatedRAW1 (
+  id SERIAL PRIMARY KEY,
+  current_product_id INT NOT NULL,
+  related_product_id INT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS relatedRAW2 (
+  id SERIAL PRIMARY KEY,
+  current_product_id INT NOT NULL,
+  related_product_id INT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS photos (
@@ -57,19 +59,19 @@ CREATE TABLE IF NOT EXISTS photos (
   FOREIGN KEY (style_id) REFERENCES styles(id)
 );
 
--- CREATE TABLE IF NOT EXISTS skus (
---   id INT PRIMARY KEY,
---   style_id INT NOT NULL,
---   size VARCHAR(10),
---   quantity INT,
---   FOREIGN KEY (style_id) REFERENCES styles(id)
--- );
+CREATE TABLE IF NOT EXISTS skus (
+  id SERIAL PRIMARY KEY,
+  style_id INT NOT NULL,
+  size VARCHAR(10),
+  quantity INT,
+  FOREIGN KEY (style_id) REFERENCES styles(id)
+);
 
--- CREATE TABLE IF NOT EXISTS related (
---   id SERIAL PRIMARY KEY,
---   current_product_id INT NOT NULL,
---   related_product_id INT NOT NULL,
---   FOREIGN KEY (current_product_id) REFERENCES product(id),
---   FOREIGN KEY (related_product_id) REFERENCES product(id)
--- );
+CREATE TABLE IF NOT EXISTS related (
+  id SERIAL PRIMARY KEY,
+  current_product_id INT NOT NULL,
+  related_product_id INT NOT NULL,
+  FOREIGN KEY (current_product_id) REFERENCES product(id),
+  FOREIGN KEY (related_product_id) REFERENCES product(id)
+);
 
