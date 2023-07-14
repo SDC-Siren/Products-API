@@ -25,7 +25,7 @@ async function setUpDatabase() {
     }
   });
 
-  client.query(`SELECT * FROM product WHERE id=1`, (err, res) => {
+  client.query(`SELECT * FROM product WHERE id=100`, (err, res) => {
     if (err) {
       console.log('Error executing query', err);
     } else {
