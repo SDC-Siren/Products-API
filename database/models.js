@@ -23,23 +23,52 @@ module.exports.getProducts = async function(page = 1, count = 5) {
 };
 
 module.exports.getInfo = async function(product_id) {
-  console.log('getting product info');
-  const productData = await pool.query({
+  let productData = await pool.query({
     text: 'SELECT id, name, slogan, description, category, default_price FROM product WHERE id = ANY($1)',
     values: [[product_id]]
   });
-  const featureData = await pool.query({
+  let featureData = await pool.query({
     text: 'SELECT feature, value FROM features WHERE product_id = ANY($1)',
     values: [[product_id]]
   });
-  const response = productData.rows[0];
+  let response = productData.rows[0];
   response.features = featureData.rows;
   return response;
 };
 
-module.exports.getStyles = function(product_id) {
+module.exports.getStyles = async function(product_id) {
   // get styles, photos, skus
-  console.log('getting product styles');
+  let styleData = await pool.query({
+    text: 'SELECT id, name, sale_price, original_price, default_style FROM styles WHERE product_id = ANY($1)',
+    values: [[product_id]]
+  });
+
+  // iterate over each style id, find photos and skus
+  for (style of styleData.rows) {
+    let photoData = await pool.query({
+      text: 'SELECT url, thumbnail_url FROM photos WHERE style_id = ANY($1)',
+      values: [[style.id]]
+    });
+    style.photos = photoData.rows;
+
+    let skuData = await pool.query({
+      text: 'SELECT id, size, quantity FROM skus WHERE style_id = ANY($1)',
+      values: [[style.id]]
+    });
+
+    let skuProperty = {};
+    for (sku of skuData.rows) {
+      skuProperty[sku.id] = {
+          quantity: sku.quantity,
+          size: sku.size
+        };
+    };
+
+    style.skus = skuProperty;
+  };
+
+  let response = styleData.rows;
+  return response;
 };
 
 module.exports.getRelated = function(product_id) {
