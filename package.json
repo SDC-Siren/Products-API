@@ -20,6 +20,7 @@
   "homepage": "https://github.com/L-ren/Products-API#readme",
   "dependencies": {
     "chai": "^4.3.7",
+    "chai-http": "^4.4.0",
     "csv": "^6.3.1",
     "csv-writer": "^1.6.0",
     "dotenv": "^16.3.1",
