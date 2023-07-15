@@ -9,10 +9,16 @@ const pool = new Pool({
 module.exports.getProducts = async function(page = 1, count = 5) {
   console.log('getting products');
 
-  // get ids for page 1, 5 per page
-  let ids = [32, 4534]
+  // get ids for products on given page (count = products per page)
+  let lastIndex = page * count;
+  let firstIndex = lastIndex - count + 1;
+  let ids = [];
+  for (let i = firstIndex; i <= lastIndex; i += 1) {
+    ids.push(i);
+  };
+
   const response = await pool.query({
-    text: 'SELECT name, slogan, description, category, default_price FROM product WHERE id = ANY($1)',
+    text: 'SELECT id, name, slogan, description, category, default_price FROM product WHERE id = ANY($1)',
     values: [ids]
   });
   return response.rows;
