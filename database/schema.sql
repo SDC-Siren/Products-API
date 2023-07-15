@@ -1,8 +1,8 @@
 CREATE TABLE IF NOT EXISTS product (
   id SERIAL PRIMARY KEY,
   name VARCHAR(40) NOT NULL,
-  slogan VARCHAR(100),
-  description VARCHAR(300),
+  slogan VARCHAR(300),
+  description VARCHAR(500),
   category VARCHAR(20),
   default_price INT
 );
@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS features (
   id SERIAL PRIMARY KEY,
   product_id INT NOT NULL,
   feature VARCHAR(30) NOT NULL,
-  value VARCHAR(25),
+  value VARCHAR(30),
   FOREIGN KEY (product_id) REFERENCES product(id)
 );
 
@@ -25,18 +25,44 @@ CREATE TABLE IF NOT EXISTS styles (
   FOREIGN KEY (product_id) REFERENCES product(id)
 );
 
+CREATE TABLE IF NOT EXISTS photosRAW (
+  id SERIAL PRIMARY KEY,
+  style_id INT NOT NULL,
+  url TEXT NOT NULL,
+  thumbnail_url TEXT
+);
+
+CREATE TABLE IF NOT EXISTS skusRAW (
+  id SERIAL PRIMARY KEY,
+  style_id INT NOT NULL,
+  size VARCHAR(10),
+  quantity INT
+);
+
+CREATE TABLE IF NOT EXISTS relatedRAW1 (
+  id SERIAL PRIMARY KEY,
+  current_product_id INT NOT NULL,
+  related_product_id INT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS relatedRAW2 (
+  id SERIAL PRIMARY KEY,
+  current_product_id INT NOT NULL,
+  related_product_id INT NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS photos (
   id SERIAL PRIMARY KEY,
   style_id INT NOT NULL,
-  url VARCHAR(135) NOT NULL,
-  thumbnail_url VARCHAR(135),
+  url TEXT NOT NULL,
+  thumbnail_url TEXT,
   FOREIGN KEY (style_id) REFERENCES styles(id)
 );
 
 CREATE TABLE IF NOT EXISTS skus (
-  id PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   style_id INT NOT NULL,
-  size VARCHAR(3),
+  size VARCHAR(10),
   quantity INT,
   FOREIGN KEY (style_id) REFERENCES styles(id)
 );
@@ -48,3 +74,4 @@ CREATE TABLE IF NOT EXISTS related (
   FOREIGN KEY (current_product_id) REFERENCES product(id),
   FOREIGN KEY (related_product_id) REFERENCES product(id)
 );
+
