@@ -71,6 +71,17 @@ module.exports.getStyles = async function(product_id) {
   return response;
 };
 
-module.exports.getRelated = function(product_id) {
-  console.log('getting related products');
+module.exports.getRelated = async function(product_id) {
+  let relatedData = await pool.query({
+    text: 'SELECT related_product_id FROM related WHERE current_product_id = ANY($1)',
+    values: [[product_id]]
+  });
+
+  let response = [];
+  // FIX THIS!!! very bad
+  for (product of relatedData.rows) {
+    response.push(product.related_product_id);
+  }
+
+  return response;
 };

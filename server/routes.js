@@ -33,8 +33,12 @@ router.get('/products/:product_id/styles', (req, res) => {
 });
 
 router.get('/products/:product_id/related', (req, res) => {
-  getRelated(req.params.product_id);
-  res.status(200).send(`${req.params.product_id} related`);
+  getRelated(req.params.product_id)
+    .then((response) => {
+      res.status(200).send(response);
+    }).catch((error) => {
+      res.sendStatus(500);
+    })
 });
 
 module.exports = router;
