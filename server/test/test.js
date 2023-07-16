@@ -51,7 +51,7 @@ describe('GET product details', () => {
   it('should return single product with features', (done) => {
     let product_id = 905434;
     return chai.request('http://localhost:3000')
-      .get(`/products/${905434}`)
+      .get(`/products/${product_id}`)
       .end((error, response) => {
         expect(error).to.be.null;
         expect(response).to.have.status(200);
@@ -64,12 +64,69 @@ describe('GET product details', () => {
   it('should respond if product does not exist in database', (done) => {
     let product_id = 403514878;
     chai.request('http://localhost:3000')
-      .get(`/products/${403514878}`)
+      .get(`/products/${product_id}`)
       .end((error, response) => {
         expect(error).to.be.null;
         expect(response).to.have.status(404);
         expect(response.body).to.be.a('string');
         expect(response.body.message).to.equal('This product does not exist.');
+        done();
+      });
+  });
+
+});
+
+describe('GET product styles', () => {
+  it('should return all styles for a given product', (done) => {
+    let product_id = 40350;
+    chai.request('http://localhost:3000')
+      .get(`/products/${product_id}/styles`)
+      .end((error, response) => {
+        expect(error).to.be.null;
+        expect(response).to.have.status(200);
+        expect(response.body.results).to.be.an('array');
+        expect(response.body.product_id).to.equal(product_id);
+        done();
+      });
+  });
+
+  it('should return empty styles array for non existent product', (done) => {
+    let product_id = 403514878;
+    chai.request('http://localhost:3000')
+      .get(`/products/${product_id}/styles`)
+      .end((error, response) => {
+        expect(error).to.be.null;
+        expect(response).to.have.status(200);
+        expect(response.body.results).to.be.an('array');
+        expect(response.body.results).to.have.lengthOf(0);
+        expect(response.body.product_id).to.equal(product_id);
+        done();
+      });
+  });
+});
+
+describe('GET related products', () => {
+  it('should return all styles for a given product', (done) => {
+    let product_id = 40350;
+    chai.request('http://localhost:3000')
+      .get(`/products/${product_id}/styles`)
+      .end((error, response) => {
+        expect(error).to.be.null;
+        expect(response).to.have.status(200);
+        expect(response.body.results).to.be.an('array');
+        done();
+      });
+  });
+
+  it('should return an empty array for nonexistent product', (done) => {
+    let product_id = 403514878;
+    chai.request('http://localhost:3000')
+      .get(`/products/${product_id}/styles`)
+      .end((error, response) => {
+        expect(error).to.be.null;
+        expect(response).to.have.status(200);
+        expect(response.body).to.be.an('array');
+        expect(response.body).to.have.lengthOf(0);
         done();
       });
   });
