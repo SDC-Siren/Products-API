@@ -15,7 +15,11 @@ router.get('/products', (req, res) => {
 router.get('/products/:product_id/', (req, res) => {
   getInfo(req.params.product_id)
     .then((response) => {
-      res.status(200).send(response);
+      if (response) {
+        res.status(200).send(response);
+      } else {
+        res.status(404).send('This product does not exist.')
+      }
     }).catch((error) => {
       console.log(error);
       res.sendStatus(500);

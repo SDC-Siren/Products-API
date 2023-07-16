@@ -68,8 +68,8 @@ describe('GET product details', () => {
       .end((error, response) => {
         expect(error).to.be.null;
         expect(response).to.have.status(404);
-        expect(response.body).to.be.a('string');
-        expect(response.body.message).to.equal('This product does not exist.');
+        expect(response.text).to.be.a('string');
+        expect(response.text).to.equal('This product does not exist.');
         done();
       });
   });
@@ -106,14 +106,14 @@ describe('GET product styles', () => {
 });
 
 describe('GET related products', () => {
-  it('should return all styles for a given product', (done) => {
+  it('should return all related product ids for a given product', (done) => {
     let product_id = 40350;
     chai.request('http://localhost:3000')
       .get(`/products/${product_id}/styles`)
       .end((error, response) => {
         expect(error).to.be.null;
         expect(response).to.have.status(200);
-        expect(response.body.results).to.be.an('array');
+        expect(response.body).to.be.an('array');
         done();
       });
   });
