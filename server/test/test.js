@@ -85,7 +85,7 @@ describe('GET product styles', () => {
         expect(error).to.be.null;
         expect(response).to.have.status(200);
         expect(response.body.results).to.be.an('array');
-        expect(response.body.product_id).to.equal(product_id);
+        expect(response.body.product_id).to.equal(`${product_id}`);
         done();
       });
   });
@@ -99,7 +99,7 @@ describe('GET product styles', () => {
         expect(response).to.have.status(200);
         expect(response.body.results).to.be.an('array');
         expect(response.body.results).to.have.lengthOf(0);
-        expect(response.body.product_id).to.equal(product_id);
+        expect(response.body.product_id).to.equal(`${product_id}`);
         done();
       });
   });
@@ -109,7 +109,7 @@ describe('GET related products', () => {
   it('should return all related product ids for a given product', (done) => {
     let product_id = 40350;
     chai.request('http://localhost:3000')
-      .get(`/products/${product_id}/styles`)
+      .get(`/products/${product_id}/related`)
       .end((error, response) => {
         expect(error).to.be.null;
         expect(response).to.have.status(200);
@@ -121,7 +121,7 @@ describe('GET related products', () => {
   it('should return an empty array for nonexistent product', (done) => {
     let product_id = 403514878;
     chai.request('http://localhost:3000')
-      .get(`/products/${product_id}/styles`)
+      .get(`/products/${product_id}/related`)
       .end((error, response) => {
         expect(error).to.be.null;
         expect(response).to.have.status(200);

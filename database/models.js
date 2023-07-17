@@ -69,7 +69,10 @@ module.exports.getStyles = async function(product_id) {
     style.skus = skuProperty;
   };
 
-  let response = styleData.rows;
+  let response = {
+    product_id,
+    results: styleData.rows
+  };
   return response;
 };
 
