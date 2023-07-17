@@ -75,3 +75,8 @@ CREATE TABLE IF NOT EXISTS related (
   FOREIGN KEY (related_product_id) REFERENCES product(id)
 );
 
+-- INDEXES FOR QUERY OPTIMIZATION
+CREATE INDEX productIndex ON features (product_id);
+CREATE INDEX productStyleIndex ON styles (product_id);
+CREATE INDEX stylePhotoIndex ON photos (style_id);CREATE INDEX styleSkuIndex ON skus (style_id);
+CREATE INDEX currentProductIndex ON related (current_product_id);

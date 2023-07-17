@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha server/test/test.js",
+    "test": "mocha server/test/apiTest.js",
+    "stress": "k6 run server/test/stressTest.js",
     "start": "nodemon server/index.js --watch"
   },
   "repository": {
