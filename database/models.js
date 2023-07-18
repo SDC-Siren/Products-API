@@ -83,7 +83,6 @@ module.exports.getRelated = async function(product_id) {
   });
 
   let response = [];
-  // FIX THIS!!! very bad
   for (product of relatedData.rows) {
     response.push(product.related_product_id);
   }
