@@ -27,12 +27,14 @@ module.exports.getInfo = async function(product_id) {
     text: 'SELECT id, name, slogan, description, category, default_price FROM product WHERE id = ANY($1)',
     values: [[product_id]]
   });
-  let featureData = await pool.query({
-    text: 'SELECT feature, value FROM features WHERE product_id = ANY($1)',
-    values: [[product_id]]
-  });
   let response = productData.rows[0];
-  response.features = featureData.rows;
+  if (response) {
+    let featureData = await pool.query({
+      text: 'SELECT feature, value FROM features WHERE product_id = ANY($1)',
+      values: [[product_id]]
+    });
+    response.features = featureData.rows;
+  };
   return response;
 };
 
@@ -67,7 +69,10 @@ module.exports.getStyles = async function(product_id) {
     style.skus = skuProperty;
   };
 
-  let response = styleData.rows;
+  let response = {
+    product_id,
+    results: styleData.rows
+  };
   return response;
 };
 
@@ -78,7 +83,6 @@ module.exports.getRelated = async function(product_id) {
   });
 
   let response = [];
-  // FIX THIS!!! very bad
   for (product of relatedData.rows) {
     response.push(product.related_product_id);
   }
